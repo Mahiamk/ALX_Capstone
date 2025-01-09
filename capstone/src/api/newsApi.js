@@ -17,6 +17,21 @@ const newsApi = {
       console.error('Error fetching news:', error);
       throw error;
     }
+  },
+  getTopHeadlines: async (country = 'us', category = '') => {
+    try {
+      const response = await axios.get(`${BASE_URL}/top-headlines`, {
+        params: {
+          country,
+          category,
+          apiKey: apikey,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching top headlines:', error);
+      throw error;
+    }
   }
 };
 
