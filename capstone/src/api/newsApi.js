@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://newsapi.org/v2';
-const apikey = import.meta.env.VITE_REACT_APP_API_KEY;
+const BASE_URL = 'https://newsapi.org/v2';  // Base URL for the News API
+const apikey = import.meta.env.VITE_REACT_APP_API_KEY; // API key for the News API
 
-const newsApi = {
-  fetchNews: async () => {
+const newsApi = {  // News API object
+  fetchNews: async () => { // Fetch news articles
     try {
       const response = await axios.get(`${BASE_URL}/top-headlines`, {
         params: {
