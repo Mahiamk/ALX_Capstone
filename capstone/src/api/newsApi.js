@@ -32,7 +32,23 @@ const newsApi = {
       console.error('Error fetching top headlines:', error);
       throw error;
     }
-  }
+  },
+  searchNews: async (query, sortBy = 'relevancy', page = 1) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/everything`, {
+        params: {
+          q: query,
+          sortBy,
+          page,
+          apiKey: apikey,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error searching news:', error);
+      throw error;
+    }
+  },
 };
 
 export default newsApi;
