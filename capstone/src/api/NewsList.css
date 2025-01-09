@@ -1,0 +1,46 @@
+/* NewsList.css */
+
+.news-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.news-item {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.news-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Large screens (lg, xl) */
+@media (min-width: 1024px) {
+  .news-list {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+/* Medium screens (sm, md) */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .news-list {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* Small screens (xs, sm) */
+@media (max-width: 639px) {
+  .news-list {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1rem;
+  }
+}
