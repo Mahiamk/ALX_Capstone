@@ -34,4 +34,15 @@ const NewsCard = ({ article }) => {
   );
 };
 
+NewsCard.propTypes = {
+  article: PropTypes.shape({
+    urlToImage: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    author: PropTypes.string,
+    publishedAt: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired
+  }).isRequired
+};
+
 export default NewsCard;
