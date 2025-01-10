@@ -6,10 +6,10 @@ const apikey = import.meta.env.VITE_REACT_APP_API_KEY; // API key for the News A
 const newsApi = {  // News API object
   fetchNews: async () => { // Fetch news articles
     try {
-      const response = await axios.get(`${BASE_URL}/top-headlines`, {
+      const response = await axios.get(`${BASE_URL}/everything`, {
         params: {
           country: 'us',
-          apiKey: apikey,
+          apiKey: apikey
         },
       });
       return response.data.articles;
@@ -18,12 +18,11 @@ const newsApi = {  // News API object
       throw error;
     }
   },
-  getTopHeadlines: async (country = 'us', category = '') => {
+  getTopHeadlines: async (country = 'us') => {
     try {
       const response = await axios.get(`${BASE_URL}/top-headlines`, {
         params: {
           country,
-          category,
           apiKey: apikey,
         },
       });
@@ -56,17 +55,14 @@ const newsApi = {  // News API object
       if (typeof category !== 'string') {
         throw new Error('Category must be a string. Received: ' + typeof category);
       }
-  
-      console.log('Fetching news for category:', category);  // Debugging line
-  
+    
       const response = await axios.get(`${BASE_URL}/top-headlines`, {
         params: {
           category,
           apiKey: apikey,
         },
       });
-      console.log('Fetched news by category:', response.data.articles);  // Debugging line
-      return response.data.articles;
+      return response.data;
     } catch (error) {
       console.error('Error fetching news by category:', error.message);
       throw error;
