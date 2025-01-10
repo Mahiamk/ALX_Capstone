@@ -1,17 +1,31 @@
 import "./footer.css"
+import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
 const Footer = () => {
+  const [navbar, setnavbar] = useState(false);
+  const handleCategoryChange = (category) => {
+    console.log('Selected category:', category);
+    onCategoryChange(category);
+  };
   return (
     <>
       <footer>
         <div className='container'>
           <div className='box logo'>
             <img src='../images/tech-logo-footer.png' alt='' />
-            <p>DP is an amazing magazine Blogger theme that is easy to customize for your needs</p>
+            <p>Your go-to platform for the latest news across Technology, Business, Sports, Health, and Entertainment.</p>
             <i className='fa fa-envelope'></i>
             <span> <a href="amk0966@gmail.com">amk0966@gmail.com</a> </span> <br />
             <i className='fa fa-headphones'></i>
-            <span> +251966007795</span>
+            <span>Phone No: +251966007795</span>
+            <span>Follow our social media</span>
+          
+          <div className="social-links">
+            <a href="#" className="fa fa-linkedin"></a>
+            <a href="#" className="fa fa-youtube"></a>
+            <a href="#" className="fa fa-instagram"></a>
+          </div>
           </div>
           <div className='box'>
             <h3>SPORT</h3>
@@ -38,23 +52,13 @@ const Footer = () => {
           </div>
           <div className='box'>
             <h3>LABELS</h3>
-            {/*<i className='fa fa-chevron-right'></i>*/}
-            <ul>
-              <li>
-                <span>Tech</span> <label>(5)</label>
-              </li>
-              <li>
-                <span>Entertainment</span> <label>(6)</label>
-              </li>
-              <li>
-                <span>Business</span> <label>(7)</label>
-              </li>
-              <li>
-                <span>Sport</span> <label>(9)</label>
-              </li>
-              <li>
-                <span>Health</span> <label>(9)</label>
-              </li>
+            <ul className={navbar ? "navbar" : 'flex'} onClick={() => setnavbar(false)}>
+              <li><Link to='/' >Home</Link></li>
+              <li><Link to="/technology">Technology</Link></li>
+              <li><Link to="/business">Business</Link></li>
+              <li><Link to="/sports">Sports</Link></li>
+              <li><Link to="/health">Health</Link></li>
+              <li><Link to='/entertainment'>Entertainment</Link></li>
             </ul>
           </div>
         </div>
