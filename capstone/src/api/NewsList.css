@@ -30,16 +30,17 @@
 }
 
 /* Medium screens (sm, md) */
-@media (min-width: 640px) and (max-width: 1023px) {
+/* @media (min-width: 640px) and (max-width: 1023px) {
   .news-list {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
-}
+} */
 
 /* Small screens (xs, sm) */
 @media (max-width: 639px) {
   .news-list {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+
     padding: 1rem;
   }
 }
