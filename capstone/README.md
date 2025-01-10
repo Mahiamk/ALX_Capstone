@@ -11,7 +11,7 @@ DailyPulse is a news application that provides the latest news across various ca
 - Save favorite news articles
 
 ## Project Structure
-.
+```
 ├── README.md
 ├── eslint.config.js
 ├── index.html
@@ -62,7 +62,7 @@ DailyPulse is a news application that provides the latest news across various ca
 │   ├── server
 │   └── ui
 └── vite.config.js
-
+```
 
 ## Installation
 
