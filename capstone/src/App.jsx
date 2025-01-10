@@ -1,45 +1,50 @@
-// App.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams, BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/common/header/Header";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Footer from "./components/common/footer/Footer";
-import Homepages from "./components/home/Homepages";
-import CategoryPage from "./components/category/CategoryPage";
-import NewsCard from "./api/NewsCard"; // Ensure this path is correct
+import Homepages from "./pages/Homepages";
+import CategoryPage from "./pages/CategoryPage";
 import "./App.css";
-import { fetchNewsByCategory } from "./api/newsApi";
-import { Category } from "@mui/icons-material";
+import Head from "./components/common/header/Head";
+import newsApi from "./api/newsApi";
 
 const App = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const handleCategoryChange = () => {
-    setArticles([]);
+  const { category } = useParams(); // Extract category from URL params
+
+  useEffect(() => {
+    if (category) {
+      setLoading(true);
+      setError(null);
+      newsApi.fetchNewsByCategory(category)
+        .then(data => {
+          console.log('Fetched news data:', data);
+          setArticles(data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          setError(error);
+          setLoading(false);
+        });
+    }
+  }, [category]); // Dependency on `category`
+
+  const handleCategoryChange = (categoryArtcile) => {
+    setArticles(categoryArtcile);
     setLoading(true);
     setError(null);
   };
 
-  fetchNewsByCategory(Category).then((fetchedArticles) => {setArticles(fetchedArticles); setLoading(false);}).catch((error) => {setError(error); setLoading(false);});
-
   return (
     <Router>
+      <Head />
       <Header onCategoryChange={handleCategoryChange} />
       <Routes>
         <Route path="/" element={<Homepages />} />
-        <Route
-          path="/:category"
-          element={<CategoryPage 
-            articles={articles}
-            loading={loading}
-            error={error}
-            />}
-        />
-        <Route
-          path="/:category/:id"
-          element={<NewsCard />}
-        />
+        <Route path="/:category" element={<CategoryPage />} />
       </Routes>
       <Footer />
     </Router>
