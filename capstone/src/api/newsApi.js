@@ -8,7 +8,6 @@ const newsApi = {  // News API object
     try {
       const response = await axios.get(`${BASE_URL}/everything`, {
         params: {
-          country: 'us',
           apiKey: apikey
         },
       });
