@@ -17,7 +17,14 @@ const Homepages = () => {
 
         // Check if response and response.sources exist before proceeding
         if (response.status === 'ok') {
-          setHeadlines(response.articles);
+          const articleData = response.articles.filter(
+            (article) =>
+              article.title &&
+              article.description &&
+              article.urlToImage &&
+              article.url
+          );
+          setHeadlines(articleData);
         } else {
           setError("No Headlines found in the response.");
         }
@@ -45,7 +52,8 @@ const Homepages = () => {
                     display: 'grid',
                     gridTemplateColumns: 'repeat(3, 1fr)', // 3 columns
                     gap: '1rem', // Space between grid items
-                  }}>
+                  }}
+                  >
                   {headlines.map((article, index) => (
                     <li
                       key={index}

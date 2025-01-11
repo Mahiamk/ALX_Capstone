@@ -9,9 +9,9 @@ import Head from "./components/common/header/Head";
 import newsApi from "./api/newsApi";
 
 const App = () => {
-  const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [, setArticles] = useState([]);
+  const [, setLoading] = useState(true);
+  const [, setError] = useState(null);
 
   const { category } = useParams(); // Extract category from URL params
 
@@ -32,16 +32,10 @@ const App = () => {
     }
   }, [category]); // Dependency on `category`
 
-  const handleCategoryChange = (categoryArtcile) => {
-    setArticles(categoryArtcile);
-    setLoading(true);
-    setError(null);
-  };
-
   return (
     <Router>
       <Head />
-      <Header onCategoryChange={handleCategoryChange} />
+      <Header/>
       <Routes>
         <Route path="/" element={<Homepages />} />
         <Route path="/:category" element={<CategoryPage />} />

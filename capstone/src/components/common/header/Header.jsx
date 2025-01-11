@@ -1,17 +1,16 @@
 import { useState } from "react";
-import PropTypes from 'prop-types';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import newsApi from "../../../api/newsApi";
 import './Header.css';
 
-const Header = ({ onCategoryChange }) => {
+const Header = () => {
   const [navbar, setnavbar] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [categories, setCategories] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);  // To manage loading state
+  // const [isLoading, setIsLoading] = useState(true);  // To manage loading state
   const [error, setError] = useState(null);  // To manage error state
   const [isDarkTheme, setIsDarkTheme] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
@@ -44,11 +43,12 @@ const Header = ({ onCategoryChange }) => {
     } catch (error) {
       console.error('Error fetching news:', error);
     }
-    onCategoryChange(category);
     setnavbar(false);
     // navigate(`/${category}`);
   };
-
+if(error) {
+  return <div className="error">{error}</div>
+}
 
   return (
     <header>
@@ -69,12 +69,15 @@ const Header = ({ onCategoryChange }) => {
 
           <nav>
             <ul className={navbar ? "navbar" : 'flex'} onClick={() => setnavbar(false)}>
-              <li><Link to='/' >Home</Link></li>
-              <li><Link to="/technology">Technology</Link></li>
-              <li><Link to="/business">Business</Link></li>
-              <li><Link to="/sports">Sports</Link></li>
-              <li><Link to="/health">Health</Link></li>
-              <li><Link to='/entertainment' onClick={() => handleCategoryChange('entertainment')}>Entertainment</Link></li>
+              <li><Link to='/' style={{ color: window.location.pathname === '/' ? 'crimson' : '' }}>Home</Link></li>
+              <li><Link to="/technology" style={{ color: window.location.pathname === '/technology' ? 'crimson' : '' }}>Technology</Link></li>
+              <li><Link to="/business" style={{ color: window.location.pathname === '/business' ? 'crimson' : '' }}>Business</Link></li>
+              <li><Link to="/sports" style={{ color: window.location.pathname === '/sports' ? 'crimson' : '' }}>Sports</Link></li>
+              <li><Link to="/health" style={{ color: window.location.pathname === '/health' ? 'crimson' : '' }}>Health</Link></li>
+              <li><Link to='/entertainment' 
+                onClick={() => handleCategoryChange('entertainment')}
+                style={{ color: window.location.pathname === '/entertainment' ? 'crimson' : '' }}
+              >Entertainment</Link></li>
             </ul>
             <button className='barIcon' onClick={() => setnavbar(!navbar)}>
               {navbar ? <i className="fa fa-times"></i> : <i className="fa fa-bars"></i>}
@@ -85,10 +88,6 @@ const Header = ({ onCategoryChange }) => {
       </div>
     </header>
   );
-};
-
-Header.propTypes = {
-  onCategoryChange: PropTypes.func.isRequired,
 };
 
 export default Header;

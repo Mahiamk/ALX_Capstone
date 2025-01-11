@@ -1,5 +1,6 @@
 //import { colors } from "@mui/material";
 import newsApi from "../../../api/newsApi";
+import logo from "../../../images/logo.png";
 const Head = () => {
   const news = newsApi.fetchNews();
   console.log("news", news);
@@ -8,7 +9,7 @@ const Head = () => {
       <section className='head'>
         <div className='container flexSB paddingTB'>
           <div className='logo'>
-            <img src='/src/images/logo.png' alt='logo' />
+            <img src={logo} alt='logo' />
           </div>
           <div className='ad'>
             <h1></h1>
